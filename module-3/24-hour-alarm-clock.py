@@ -17,7 +17,7 @@ print('Enter time now (in hours): ', end = '')
 time_now = int(input())
 
 #Gather the number of hour to wait until the alarm goes off 
-print('How many hours until alarm goes off (in hours): ', end = '')
+print('How many hours until alarm goes off (in hours)?: ', end = '')
 hours_until_alarm = int(input())
 
 #Using the modulo function, determine the number of hours from now until the alarm goes
