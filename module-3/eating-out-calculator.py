@@ -23,7 +23,8 @@ amount_sales_tax = round(food_cost * percent_sales_tax, 2)
 total_price = food_cost + amount_tip + amount_sales_tax
 
 #Print out the values for all three computed values: tip amount, sales tax, and total price
-#adding a newline prior to the outputs to make it easier to read
-print("\nTip amount: $", amount_tip)
-print("Sales tax amount: $", amount_sales_tax)
-print("Total price: $", total_price)
+#adding a newline prior to the outputs and after them to make it easier to read
+print("\nTip amount: ${:.2f}".format(amount_tip), end='')
+print("\nSales tax amount: ${:.2f}".format(amount_sales_tax), end='')
+print("\nTotal price: ${:.2f}".format(total_price), end='')
+print()
