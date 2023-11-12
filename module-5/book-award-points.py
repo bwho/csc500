@@ -14,4 +14,4 @@ elif (num_books >= 6) and (num_books < 8):
 elif (num_books >= 8):
 	award_points = 60
 
-print(f"Number of points award for this month: {award_points}")
+print(f"Number of points awarded for this month: {award_points}")
