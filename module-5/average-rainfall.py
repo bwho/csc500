@@ -1,14 +1,14 @@
-# Gather number of years to collect records for from user input
+#Gather number of years to collect records for from user input
 print("Enter number of years of rainfall records to enter:")
 num_years = int(input())
 
-# Set number of months per year and initialize variable to collect rainfall
-# amounts 
+#Set number of months per year and initialize variable to collect rainfall
+#amounts 
 months_per_year = 12
 total_rainfall = 0
 
-# Inititalize counter variable for years and begin to loop through number of
-# years
+#Inititalize counter variable for years and begin to loop through number of
+#years
 year = 1
 while year <= num_years:
     
