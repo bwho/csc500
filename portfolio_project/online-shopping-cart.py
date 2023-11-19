@@ -12,12 +12,16 @@ class ItemToPurchase:
         self.item_price = float(item_price)
         self.item_quantity = int(item_quantity)
 
+    # Method to gather details of a cart item
     def get_item_details(self, item_to_purchase):
+
+        # Gather the values for each of the four attributes in an item
         item_to_purchase.item_name = input("Enter the item name: ")
         item_to_purchase.item_description = input("Enter the item description: ")
         item_to_purchase.item_price = float(input("Enter the item price: "))
         item_to_purchase.item_quantity = int(input("Enter the item quantity: "))
 
+        # Return item_to_purchase object
         return item_to_purchase
 
     # Method to print out subtotal costs per each item object, including formatting to reinforce preferred data types
