@@ -12,6 +12,14 @@ class ItemToPurchase:
         self.item_price = float(item_price)
         self.item_quantity = int(item_quantity)
 
+    def get_item_details(self, item_to_purchase):
+        item_to_purchase.item_name = input("Enter the item name: ")
+        item_to_purchase.item_description = input("Enter the item description: ")
+        item_to_purchase.item_price = float(input("Enter the item price: "))
+        item_to_purchase.item_quantity = int(input("Enter the item quantity: "))
+
+        return item_to_purchase
+
     # Method to print out subtotal costs per each item object, including formatting to reinforce preferred data types
     # Expects no parameters; other than print statements, no values returned
     def print_item_cost(self):
@@ -19,7 +27,7 @@ class ItemToPurchase:
 
     # Method to print out descriptions per each item object
     # Expects no parameters; other than print statements, no values returned
-    def print_item_cost(self):
+    def print_item_description(self):
         print(f"{self.item_name}: {self.item_description}")
 
 # Class Shopping cart that has typical CRUD methods for a shopping cart and a few additional methods to sum & print
@@ -113,7 +121,7 @@ class ShoppingCart:
         if (self.cart_items):
 
             # Print the header values: list owner's name, the date, and the number of items in the cart
-            print(f"\n{self.customer_name}'s Shopping Cart - {self.current_date}")
+            print(f"{self.customer_name}'s Shopping Cart - {self.current_date}")
             print(f"Number of Items: {self.get_num_items_in_cart()}")
             
             # Loop over each item in the cart and call print_item_cost() method to print out the subtotal values
@@ -134,7 +142,7 @@ class ShoppingCart:
         if (self.cart_items):
 
             # Print the header values: list owner's name, the date, and the descriptive header
-            print(f"\n{self.customer_name}'s Shopping Cart - {self.current_date}")
+            print(f"{self.customer_name}'s Shopping Cart - {self.current_date}")
             print(f"Item Descriptions")
 
             # Loop over each item in the cart and call print_item_description() method to print out the descriptions
@@ -146,52 +154,99 @@ class ShoppingCart:
     
 # Method to print out the shopping cart menu 
 def print_menu(shopping_cart):
-    quit_selected = False
+    
+    # Print out menu options to user
+    print("\nMENU")
+    print("a - Add item to cart")
+    print("r - Remove item from cart")
+    print("c - Change item quantity")
+    print("i - Output items' descriptions")
+    print("o - Output shopping cart")
+    print("q - Quit")
+    print("Choose an option:")
 
-    while not(quit_selected):
-        print("MENU")
-        print("a - Add item to cart")
-        print("r - Remove item from cart")
-        print("c - Change item quantity")
-        print("i - Output items' descriptions")
-        print("o - Output shopping cart")
-        print("q - Quit")
-        print("Choose an option:")
+    # Gather menu choice from user...
+    menu_choice = input()
 
-        menu_choice = input()
-
-        if (menu_choice == 'q'):
-            quit_selected = True
-
-    print(f"Menu choice: {menu_choice}")
+    # ...and return it to the main code body
+    return menu_choice
 
 # Main method containing entry point code
 def main():
-    cart = ShoppingCart("Barrett", "November 18, 2023")
-    print_menu(cart)
+    
+    # Initialize a ShoppingCart object to the default values noted in the textbook, as the porfolio exercise doesn't
+    # request that we implement this piece yet. I'm assuming gathering this will be part of a future assignment.
+    cart = ShoppingCart("John Doe", "February 1, 2020")
 
-    # Instantiate two ItemToPurchase objects
-    item1 = ItemToPurchase()
-    item2 = ItemToPurchase()
+    # Initialize Boolean sentinel value to False
+    quit_selected = False
 
-    # Get the first item's name, price, and quantity from the user
-    print("Item 1")
-    item1.item_name = input("Enter the item name: ")
-    item1.item_price = float(input("Enter the item price: "))
-    item1.item_quantity = int(input("Enter the item quantity: "))
+    # Create while loop to show the menu to the user, allowing them to make selections until they choose to quit
+    while not(quit_selected):
 
-    # Get the second item's name, price, and quantity from the user
-    print("\nItem 2")
-    item2.item_name = input("Enter the item name: ")
-    item2.item_price = float(input("Enter the item price: "))
-    item2.item_quantity = int(input("Enter the item quantity: "))
+        # Show menu and gather menu choice from the user
+        menu_choice = print_menu(cart)
 
-    # Testing block
+        # if-else decision tree to execute each option the user selects, including an option for invalid input
+        # Option: user chooses to quit
+        if (menu_choice == "q"):
 
-    cart.add_item(item1)
-    cart.add_item(item2)
+            # Print confirmation of choice to quit and update the Boolean sentinel value to True 
+            print("\nQUIT")
+            quit_selected = True
 
-    cart.print_total()
+        # Option: user chooses to add an item to the cart
+        elif (menu_choice == "a"):
+            
+            # Print confirmation of choice to add an item, initialize a new item object and get the values for it 
+            print("\nADD ITEM TO CART")
+            item = ItemToPurchase()
+            item = item.get_item_details(item)
+
+            # Call function to add the gathered item to the cart
+            cart.add_item(item)
+
+        # Option: user chooses to add a remove an item from the cart
+        elif (menu_choice == "r"):
+            
+            # Print confirmation of choice to remove an item, initialize a new item object and get the values for it 
+            print("\nREMOVE ITEM FROM CART")
+            item = ItemToPurchase()
+            item = item.get_item_details(item)
+
+            # Call function to remove the gathered item from the cart
+            cart.remove_item(item)
+        
+        # Option: user chooses to change an item quantity in the cart
+        # NOTE: Based on the requested implementation, this function will update changes to all of the following
+        # fields: item description, item cost, and item quantity
+        elif (menu_choice == "c"):
+            
+            # Print confirmation of choice to change an item, initialize a new item object and get the values for it         
+            print("\nCHANGE ITEM QUANTITY")
+            item = ItemToPurchase()
+            item = item.get_item_details(item)
+
+            # Call function to modify the gathered item in the cart
+            cart.modify_item(item)
+
+        # Option: user chooses to print the descriptions of the items in the cart              
+        elif (menu_choice == "i"):
+            
+            # Print confirmation of choice to change output items' descriptions, call function to print them out
+            print("\nOUTPUT ITEMS' DESCRIPTIONS")
+            cart.print_descriptions()
+
+        # Option: user chooses to print the items in the cart and their sub-totals
+        elif (menu_choice == "o"):
+            
+            # Print confirmation of choice to change output items in cart, call function to print them out
+            print("\nOUTPUT SHOPPING CART")
+            cart.print_total()
+
+        # Option: user enters invalid output, print a message to indicate this
+        else:
+            print("\nINVALID ENTRY, PLEASE TRY AGAIN")
 
 # Use special __name__ variable to allow for other methods contained in the file to be run directly from the command
 # line if deisred
