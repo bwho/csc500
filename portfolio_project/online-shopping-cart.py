@@ -144,30 +144,56 @@ class ShoppingCart:
             # If the cart is empty, let the user know
             print("SHOPPING CART IS EMPTY")
     
-'''
-Primary code block
-'''    
-# Instantiate two ItemToPurchase objects
-item1 = ItemToPurchase()
-item2 = ItemToPurchase()
+# Method to print out the shopping cart menu 
+def print_menu(shopping_cart):
+    quit_selected = False
 
-# Get the first item's name, price, and quantity from the user
-print("Item 1")
-item1.item_name = input("Enter the item name: ")
-item1.item_price = float(input("Enter the item price: "))
-item1.item_quantity = int(input("Enter the item quantity: "))
+    while not(quit_selected):
+        print("MENU")
+        print("a - Add item to cart")
+        print("r - Remove item from cart")
+        print("c - Change item quantity")
+        print("i - Output items' descriptions")
+        print("o - Output shopping cart")
+        print("q - Quit")
+        print("Choose an option:")
 
-# Get the second item's name, price, and quantity from the user
-print("\nItem 2")
-item2.item_name = input("Enter the item name: ")
-item2.item_price = float(input("Enter the item price: "))
-item2.item_quantity = int(input("Enter the item quantity: "))
+        menu_choice = input()
 
-# Testing block
+        if (menu_choice == 'q'):
+            quit_selected = True
 
-cart = ShoppingCart("Barrett", "November 18, 2023")
+    print(f"Menu choice: {menu_choice}")
 
-cart.add_item(item1)
-cart.add_item(item2)
+# Main method containing entry point code
+def main():
+    cart = ShoppingCart("Barrett", "November 18, 2023")
+    print_menu(cart)
 
-cart.print_total()
+    # Instantiate two ItemToPurchase objects
+    item1 = ItemToPurchase()
+    item2 = ItemToPurchase()
+
+    # Get the first item's name, price, and quantity from the user
+    print("Item 1")
+    item1.item_name = input("Enter the item name: ")
+    item1.item_price = float(input("Enter the item price: "))
+    item1.item_quantity = int(input("Enter the item quantity: "))
+
+    # Get the second item's name, price, and quantity from the user
+    print("\nItem 2")
+    item2.item_name = input("Enter the item name: ")
+    item2.item_price = float(input("Enter the item price: "))
+    item2.item_quantity = int(input("Enter the item quantity: "))
+
+    # Testing block
+
+    cart.add_item(item1)
+    cart.add_item(item2)
+
+    cart.print_total()
+
+# Use special __name__ variable to allow for other methods contained in the file to be run directly from the command
+# line if deisred
+if __name__ == "__main__":
+    main()
