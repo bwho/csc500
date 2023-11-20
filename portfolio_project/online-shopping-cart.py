@@ -52,7 +52,7 @@ class ShoppingCart:
 
     # Method to remove an item from the cart, including error proofing if item is not already in the cart
     # Expects an item object as the only parameter; other than print statements, no values returned
-    def remove_item(self, item_to_purchase):
+    def remove_item(self, item_name):
         
         # Initialize Boolean sentinel value to False
         found_item = False
@@ -62,9 +62,9 @@ class ShoppingCart:
 
             # If a match hasnt't been found and the item name does match, then set the sentinel to True, remove the
             # item from the cart 
-            if (not(found_item) and (item_to_purchase.item_name == item.item_name)):
+            if (not(found_item) and (item_name == item.item_name)):
                 found_item = True
-                self.cart_items.remove(item_to_purchase)
+                self.cart_items.remove(item)
         
         # If the item was never found in the cart, then print a message letting the user know
         if not(found_item):
@@ -213,13 +213,13 @@ def main():
         # Option: user chooses to add a remove an item from the cart
         elif (menu_choice == "r"):
             
-            # Print confirmation of choice to remove an item, initialize a new item object and get the values for it 
+            # Print confirmation of choice to remove an item, initialize a new item object and get the name of the item
+            # to remove 
             print("\nREMOVE ITEM FROM CART")
-            item = ItemToPurchase()
-            item = item.get_item_details(item)
+            item_name = input("Enter the item name to remove: ")
 
             # Call function to remove the gathered item from the cart
-            cart.remove_item(item)
+            cart.remove_item(item_name)
         
         # Option: user chooses to change an item quantity in the cart
         # NOTE: Based on the requested implementation, this function will update changes to all of the following
