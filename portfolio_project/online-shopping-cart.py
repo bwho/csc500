@@ -178,9 +178,17 @@ def print_menu(shopping_cart):
 # Main method containing entry point code
 def main():
     
+    # Prompt the user for the customer's name and today's date, confirm the inputs by printing them out
+    print("Enter customer's name:")
+    customer_name = input()
+    print("Enter today's date:")
+    todays_date = input()
+    print(f"Customer name: {customer_name}")
+    print(f"Today's date: {todays_date}")
+
     # Initialize a ShoppingCart object to the default values noted in the textbook, as the porfolio exercise doesn't
     # request that we implement this piece yet. I'm assuming gathering this will be part of a future assignment.
-    cart = ShoppingCart("John Doe", "February 1, 2020")
+    cart = ShoppingCart(customer_name, todays_date)
 
     # Initialize Boolean sentinel value to False
     quit_selected = False
@@ -216,7 +224,7 @@ def main():
             # Print confirmation of choice to remove an item, initialize a new item object and get the name of the item
             # to remove 
             print("\nREMOVE ITEM FROM CART")
-            item_name = input("Enter the item name to remove: ")
+            item_name = input("Enter name of item to remove: ")
 
             # Call function to remove the gathered item from the cart
             cart.remove_item(item_name)
@@ -226,10 +234,14 @@ def main():
         # fields: item description, item cost, and item quantity
         elif (menu_choice == "c"):
             
-            # Print confirmation of choice to change an item, initialize a new item object and get the values for it         
+            # Print confirmation of choice to change item quantity, initialize a new item object and prompt user for 
+            # its values         
             print("\nCHANGE ITEM QUANTITY")
             item = ItemToPurchase()
-            item = item.get_item_details(item)
+            print("Enter the item name:")
+            item.item_name = input()
+            print("Enter the new quantity:")
+            item.item_quantity = int(input())
 
             # Call function to modify the gathered item in the cart
             cart.modify_item(item)
