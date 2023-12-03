@@ -156,7 +156,8 @@ class ShoppingCart:
             # If the cart is empty, let the user know
             print("SHOPPING CART IS EMPTY")
     
-# Method to print out the shopping cart menu 
+# Method to print out the shopping cart menu
+# NOTE: The assignment called for a shopping_cart object to be a parameter of print_menu, however, it goes unused 
 def print_menu(shopping_cart):
     
     # Print out menu options to user
